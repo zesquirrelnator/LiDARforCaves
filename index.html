@@ -157,15 +157,23 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             function addToList(user) {
-                axios.post("https://firestore.googleapis.com/v1/projects/lidarwebsite-ba376/databases/(default)/documents/user", 
-                { 
-                    fields: { 
-                        email: { stringValue: user }, 
-                    } 
+                if(user.indexOf('@') > 0){
+                    axios.post("https://firestore.googleapis.com/v1/projects/lidarwebsite-ba376/databases/(default)/documents/user", 
+                    { 
+                        fields: { 
+                            email: { stringValue: user }, 
+                        } 
+                    }
+                    ).then(res => { 
+                        //console.log("Post created") 
+                        alert("Success!")
+                        document.getElementById('textInput').value = '';
+                    })
                 }
-                ).then(res => { 
-                    console.log("Post created") 
-                })
+                else{
+                    alert("I'm not sure if that email is correct. Try again!")
+                }
+                
             }
         </script>
         <!-- Bootstrap core JS-->
